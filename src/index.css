@@ -1,17 +1,17 @@
 body {
-  background: #e8e7e7;
+  background: #141414;
   font-family: arial;
   text-transform: uppercase;
 }
 
 header {
-  color: #ffffff;
+  color: #070707;
   padding: 5px 10px;
   text-align: center;
   display: flex;
   align-items: center;
   background-color: a#000000;
-  border-bottom: solid 2px #ffcaca;
+  border-bottom: solid 2px #060606;
 }
 
 header h1 {
@@ -21,7 +21,7 @@ header h1 {
   font-weight: normal;
 }
 
-.grocery-list {
+.todo-list {
   background: #fff;
   width: 450px;
   margin: 70px auto;
@@ -33,7 +33,7 @@ header h1 {
   display: flex;
   align-items: center;
   font-size: 1.2em;
-  border-bottom: solid 2px #EEEEEE;
+  border-bottom: solid 2px #090909;
   letter-spacing: 2px;
 }
 
@@ -56,7 +56,7 @@ header h1 {
 
 .item-name,
 .quantity-amount {
-  color: #662323;
+  color: #030303;
 }
 
 .item-name {
@@ -68,12 +68,12 @@ header h1 {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 1px solid #fa6363;
+  border: 1px solid #0f0f0f;
   cursor: pointer;
   margin: 0 1.5rem;
   padding: 0 0 3px 0;
   background: none;
-  box-shadow: 0 0 .1rem #fa6363b1;
+  box-shadow: 0 0 .1rem #010101b1;
 }
 
 .quantity {
@@ -88,7 +88,7 @@ header h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #662323;
+  color: #020202;
   font-size: 0.8em;
 }
 
