@@ -1,0 +1,138 @@
+body {
+  background: #e8e7e7;
+  font-family: arial;
+  text-transform: uppercase;
+}
+
+header {
+  color: #ffffff;
+  padding: 5px 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  background-color: a#000000;
+  border-bottom: solid 2px #ffcaca;
+}
+
+header h1 {
+  flex-grow: 1;
+  font-size: 1.5em;
+  letter-spacing: 2px;
+  font-weight: normal;
+}
+
+.grocery-list {
+  background: #fff;
+  width: 450px;
+  margin: 70px auto;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+  border-bottom: solid 2px #EEEEEE;
+  letter-spacing: 2px;
+}
+
+.remove-item:hover+.item-name {
+  text-decoration: line-through;
+}
+
+.total-items {
+  width: 100px;
+  margin: 0 0 0 28px;
+  font-weight: normal;
+}
+
+.total-items td:first-child {
+  text-align: right;
+  font-weight: normal;
+  letter-spacing: 2px;
+  font-size: .7em;
+}
+
+.item-name,
+.quantity-amount {
+  color: #662323;
+}
+
+.item-name {
+  flex-grow: 1;
+  line-height: 3.5em;
+}
+
+.remove-item {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #fa6363;
+  cursor: pointer;
+  margin: 0 1.5rem;
+  padding: 0 0 3px 0;
+  background: none;
+  box-shadow: 0 0 .1rem #fa6363b1;
+}
+
+.quantity {
+  display: grid;
+  grid-template-areas:
+  "QTY increment value"
+  "QTY decrement value";
+}
+
+.qty-label{
+  grid-area: QTY;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #662323;
+  font-size: 0.8em;
+}
+
+.increment,
+.decrement {
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: auto .5rem;
+  padding: .33rem;
+  width: 2rem;
+  font-size: 1.1rem;
+  margin: 0 .5rem;
+}
+
+.decrement {
+  grid-area: decrement;
+}
+
+.increment {
+  grid-area: increment;
+  align-self: end;
+}
+
+.increment:hover {
+  background: #83D97C;
+}
+
+.decrement:hover {
+  background: #EF5350;
+}
+
+.quantity-amount {
+  grid-area: value;
+  align-self: center;
+  font-family: monospace;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+}
