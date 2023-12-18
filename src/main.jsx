@@ -65,11 +65,22 @@ const Item = (props) => {
 const Counter = () => {
     const [streak, setStreak] = useState(0)
 
+    const incrementStreak = () => {
+        setStreak(streak + 1)
+    }
+
+    const decrementStreak = () => {
+        if (streak > 0) {
+        setStreak(streak - 1)
+    }
+}
+
+
     return (
         <div className='quantity'>
             <span className='qty-label'> Streak</span>
-            <button className='increment'>+</button>
-            <button className='decrement'>-</button>
+            <button className='increment' onClick={incrementStreak}>+</button>
+            <button className='decrement' onClick={decrementStreak}>-</button>
             <span className='quantity-amount'>{streak}</span>
         </div>
 
