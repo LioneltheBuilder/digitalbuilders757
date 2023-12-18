@@ -45,10 +45,10 @@ const Header = (props) => {
     return (
         <header>
             <img src={logo} alt="Logo" style={{ height: '50px' }} />
-            <h1>{props.title}</h1>\
+            <h1>{props.title}</h1>
             <span className='total-items'>Items: {props.itemTotal}</span>
         </header>
-    )
+    );
 }
 
 const Item = (props) => {
@@ -56,25 +56,23 @@ const Item = (props) => {
         <div className='item'>
             <button className='remove-item' />
             <span className='item-name'>{props.name}</span>
-            <Counter />
-
+            <Counter streak={props.streak} />
         </div>
-    )
+    );
 }
 
-const Counter = () => {
-    const [streak, setStreak] = useState(0)
+const Counter = (props) => {
+    const [streak, setStreak] = useState(props.streak);
 
     const incrementStreak = () => {
-        setStreak(streak + 1)
+        setStreak(prevStreak => prevStreak + 1);
     }
 
     const decrementStreak = () => {
         if (streak > 0) {
-        setStreak(streak - 1)
+            setStreak(prevStreak => prevStreak - 1);
+        }
     }
-}
-
 
     return (
         <div className='quantity'>
@@ -83,33 +81,23 @@ const Counter = () => {
             <button className='decrement' onClick={decrementStreak}>-</button>
             <span className='quantity-amount'>{streak}</span>
         </div>
-
-    )
+    );
 }
 
-const App = (props) => {
+const App = () => {
     return (
         <div className='todo-list'>
-            <Header
-                title='The 7 Paths'
-                itemTotal={props.initialList.length} />
-
-            {/* 7 Paths */}
-            {props.initialList.map(item =>
-                <Item
-                    name={item.name}
-                    key={item.id}
-
-                />
-            )}
+            <Header title='The 7 Paths' itemTotal={items.length} />
+            {items.map(item => (
+                <Item name={item.name} streak={item.streak} key={item.id} />
+            ))}
         </div>
-    )
+    );
 }
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-    <StrictMode>
-        <App initialList={items} />
-    </StrictMode>
-
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
 );
