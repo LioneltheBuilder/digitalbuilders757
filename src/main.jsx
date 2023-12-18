@@ -1,5 +1,5 @@
 import React from 'react';
-import { StrictMode } from 'react';
+import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import logo from './images/logo.png';
 
@@ -56,19 +56,21 @@ const Item = (props) => {
         <div className='item'>
             <button className='remove-item' />
             <span className='item-name'>{props.name}</span>
-            <Counter quantity={props.streak} />
+            <Counter />
 
         </div>
     )
 }
 
 const Counter = () => {
+    const [streak, setStreak] = useState(0)
+
     return (
         <div className='quantity'>
             <span className='qty-label'> Streak</span>
             <button className='increment'>+</button>
             <button className='decrement'>-</button>
-            <span className='quantity-amount'>1</span>
+            <span className='quantity-amount'>{streak}</span>
         </div>
 
     )
@@ -85,7 +87,6 @@ const App = (props) => {
             {props.initialList.map(item =>
                 <Item
                     name={item.name}
-                    streak={item.quantity}
                     key={item.id}
 
                 />
