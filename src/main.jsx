@@ -49,7 +49,7 @@ const Counter = (props) => {
     );
 }
 
-const App = (props) => {
+const App = () => {
 
     const [items, setItems] = useState( [
         {
@@ -81,9 +81,16 @@ const App = (props) => {
     ])
     return (
         <div className='todo-list'>
-            <Header title='The 7 Paths' itemTotal={items.length} />
+            <Header 
+            title='The 7 Paths' 
+            itemTotal={items.length} 
+                
+            />
             {items.map(item => (
-                <Item name={item.name} streak={item.streak} key={item.id} />
+                <Item 
+                name={item.name}
+                key={item.id} 
+                />
             ))}
         </div>
     );
