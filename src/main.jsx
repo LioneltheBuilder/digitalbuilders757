@@ -79,9 +79,20 @@ const App = () => {
         }
     ]);
 
+    const [newItemName, setNewItemName] = useState('');
+
     const handleRemoveItem = (id) => {
         setItems(prevItems => prevItems.filter(i => i.id !== id))
     }
+
+    const handleAddItem = () => {
+        const newItem = {
+            name: newItemName,
+            streak: 0, 
+            id: Math.max(0, ...items.map(i => i.id)) + 1 
+        };
+        setItems(prevItems => [...prevItems, newItem]);
+        setNewItemName(''); // Reset input field after adding
 
     return (
         <div className='todo-list'>
