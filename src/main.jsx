@@ -94,30 +94,32 @@ const App = () => {
         setItems(prevItems => [...prevItems, newItem]);
         setNewItemName(''); // Reset input field after adding
 
-        return (
-            <div className='todo-list'>
-                <Header title='The 7 Paths' itemTotal={items.length} />
-                <div>
-                    <input 
-                        type="text" 
-                        value={newItemName} 
-                        onChange={(e) => setNewItemName(e.target.value)} 
-                        placeholder="Add new item" 
-                    />
-                    <button onClick={handleAddItem}>Add Item</button>
-                </div>
-                {items.map(item => (
-                    <Item 
-                        name={item.name}
-                        id={item.id}
-                        streak={item.streak}
-                        key={item.id} 
-                        removeItem={handleRemoveItem}
-                    />
-                ))}
-            </div>
-        );
     }
+
+    return (
+        <div className='todo-list'>
+            <Header title='The 7 Paths' itemTotal={items.length} />
+            <div>
+                <input 
+                    type="text" 
+                    value={newItemName} 
+                    onChange={(e) => setNewItemName(e.target.value)} 
+                    placeholder="Add new item" 
+                />
+                <button onClick={handleAddItem}>Add Item</button>
+            </div>
+            {items.map(item => (
+                <Item 
+                    name={item.name}
+                    id={item.id}
+                    streak={item.streak}
+                    key={item.id} 
+                    removeItem={handleRemoveItem}
+                />
+            ))}
+        </div>
+    );
+}
 
 const root = createRoot(document.getElementById('root'));
 root.render(
