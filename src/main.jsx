@@ -4,41 +4,6 @@ import { createRoot } from 'react-dom/client';
 import logo from './images/logo.png';
 
 
-const items = [
-    {
-        name: "Sleep 8 hrs",
-        streak: 5,
-        id: 1
-    },
-    {
-        name: "Write anything",
-        streak: 5,
-        id: 2
-    },
-    {
-        name: "Meditate / Pray",
-        streak: 5,
-        id: 3
-    },
-    {
-        name: "Exercise",
-        streak: 5,
-        id: 4
-    },
-    {
-        name: "Cold Shower",
-        streak: 5,
-        id: 5
-
-    },
-    {
-        name: "Work on a Goal",
-        streak: 5,
-        id: 6
-    }
-
-]
-
 
 
 const Header = (props) => {
@@ -84,7 +49,36 @@ const Counter = (props) => {
     );
 }
 
-const App = () => {
+const App = (props) => {
+
+    const [items, setItems] = useState( [
+        {
+            name: "Sleep 8 hrs",
+            id: 1
+        },
+        {
+            name: "Write anything",
+            id: 2
+        },
+        {
+            name: "Meditate / Pray",
+            id: 3
+        },
+        {
+            name: "Exercise",
+            id: 4
+        },
+        {
+            name: "Cold Shower",
+            id: 5
+    
+        },
+        {
+            name: "Work on a Goal",
+            id: 6
+        }
+    
+    ])
     return (
         <div className='todo-list'>
             <Header title='The 7 Paths' itemTotal={items.length} />
