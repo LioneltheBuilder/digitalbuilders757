@@ -49,32 +49,32 @@ const App = () => {
     const [items, setItems] = useState([
         {
             name: "Sleep 8 hrs",
-            streak: 5,
+            streak: 0,
             id: 1
         },
         {
             name: "Write anything",
-            streak: 5,
+            streak: 0,
             id: 2
         },
         {
             name: "Meditate / Pray",
-            streak: 5,
+            streak: 0,
             id: 3
         },
         {
             name: "Exercise",
-            streak: 5,
+            streak: 0,
             id: 4
         },
         {
             name: "Cold Shower",
-            streak: 5,
+            streak: 0,
             id: 5
         },
         {
             name: "Work on a Goal",
-            streak: 5,
+            streak: 0,
             id: 6
         }
     ]);
