@@ -1,10 +1,6 @@
-import React from 'react';
-import { StrictMode, useState } from 'react';
+import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import logo from './images/logo.png';
-
-
-
 
 const Header = (props) => {
     return (
@@ -50,46 +46,47 @@ const Counter = (props) => {
 }
 
 const App = () => {
-
-    const [items, setItems] = useState( [
+    const [items, setItems] = useState([
         {
             name: "Sleep 8 hrs",
+            streak: 5,
             id: 1
         },
         {
             name: "Write anything",
+            streak: 5,
             id: 2
         },
         {
             name: "Meditate / Pray",
+            streak: 5,
             id: 3
         },
         {
             name: "Exercise",
+            streak: 5,
             id: 4
         },
         {
             name: "Cold Shower",
+            streak: 5,
             id: 5
-    
         },
         {
             name: "Work on a Goal",
+            streak: 5,
             id: 6
         }
-    
-    ])
+    ]);
+
     return (
         <div className='todo-list'>
-            <Header 
-            title='The 7 Paths' 
-            itemTotal={items.length} 
-                
-            />
+            <Header title='The 7 Paths' itemTotal={items.length} />
             {items.map(item => (
                 <Item 
-                name={item.name}
-                key={item.id} 
+                    name={item.name}
+                    streak={item.streak}
+                    key={item.id} 
                 />
             ))}
         </div>
