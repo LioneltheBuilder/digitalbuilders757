@@ -15,7 +15,7 @@ const Header = (props) => {
 const Item = (props) => {
     return (
         <div className='item'>
-            <button className='remove-item' />
+            <button className='remove-item' onClick={() => props.removeItem(props.id)}/>
             <span className='item-name'>{props.name}</span>
             <Counter streak={props.streak} />
         </div>
@@ -79,14 +79,20 @@ const App = () => {
         }
     ]);
 
+    const handleRemoveItem = (id) => {
+        setItems(prevItems => prevItems.filter(i => i.id !== id))
+    }
+
     return (
         <div className='todo-list'>
             <Header title='The 7 Paths' itemTotal={items.length} />
             {items.map(item => (
                 <Item 
                     name={item.name}
+                    id={item.id}
                     streak={item.streak}
                     key={item.id} 
+                    removeItem={handleRemoveItem}
                 />
             ))}
         </div>
