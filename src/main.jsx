@@ -16,15 +16,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBZDa5wlrocS1iyBygFnuXboDyqSJhw1wE",
-    authDomain: "paths-b4263.firebaseapp.com",
-    projectId: "paths-b4263",
-    storageBucket: "paths-b4263.appspot.com",
-    messagingSenderId: "593046877890",
-    appId: "1:593046877890:web:1dde0a03e3c7181e7cad5b",
-    measurementId: "G-LBKBQ1XBDC"
-
-}
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
+  };
+  
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
