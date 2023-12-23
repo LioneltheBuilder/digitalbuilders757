@@ -12,6 +12,9 @@ import { collection, addDoc, query, orderBy, limit, serverTimestamp } from 'fire
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
+import { v4 as uuidv4 } from 'uuid';
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyBZDa5wlrocS1iyBygFnuXboDyqSJhw1wE",
     authDomain: "paths-b4263.firebaseapp.com",
@@ -189,11 +192,12 @@ const App = () => {
         const newItem = {
             name: newItemName,
             streak: 0,
-            id: Math.max(0, ...items.map(i => i.id)) + 1
+            id: uuidv4() // Generates a unique ID
         };
         setItems(prevItems => [...prevItems, newItem]);
         setNewItemName('');
     };
+    
 
     return (
         <div className='app'>
