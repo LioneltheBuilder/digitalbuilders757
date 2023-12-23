@@ -88,31 +88,28 @@ function SignOut() {
     );
 }
     
-    function ChatRoom() {
-        const dummy = useRef();
-        const messagesRef = firestore.collection('messages');
-        const query = messagesRef.orderBy('createdAt').limit(25);
-      
-        const [messages] = useCollectionData(query, { idField: 'id' });
-      
-        const [formValue, setFormValue] = useState('');
-      
-      
-        const sendMessage = async (e) => {
-          e.preventDefault();
-      
-          const { uid, photoURL } = auth.currentUser;
-      
-          await messagesRef.add({
+function ChatRoom() {
+    const dummy = useRef();
+    const messagesRef = collection(firestore, 'messages');
+    const q = query(messagesRef, orderBy('createdAt'), limit(25));
+
+    const [messages] = useCollectionData(q, { idField: 'id' });
+    const [formValue, setFormValue] = useState('');
+
+    const sendMessage = async (e) => {
+        e.preventDefault();
+        const { uid, photoURL } = auth.currentUser;
+
+        await addDoc(messagesRef, {
             text: formValue,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            createdAt: serverTimestamp(),
             uid,
             photoURL
-          })
-      
-          setFormValue('');
-          dummy.current.scrollIntoView({ behavior: 'smooth' });
-        }
+        });
+
+        setFormValue('');
+        dummy.current.scrollIntoView({ behavior: 'smooth' });
+    };
       
         return (<>
           <main>
