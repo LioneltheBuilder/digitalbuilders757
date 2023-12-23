@@ -114,12 +114,11 @@ function ChatRoom() {
       
         return (<>
           <main>
-      
-            {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
-      
-            <span ref={dummy}></span>
-      
-          </main>
+                {messages && messages.map(msg => (
+                    <ChatMessage key={msg.id} message={msg} /> // Use `msg.id` as key
+                ))}
+                <span ref={dummy}></span>
+            </main>
       
           <form onSubmit={sendMessage}>
       
