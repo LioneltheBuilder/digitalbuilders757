@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import logo from './images/logo.png';
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { getAnalytics } from 'firebase/analytics';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-firebase.initializeApp({
+const firebaseConfig = {
     apiKey: "AIzaSyBZDa5wlrocS1iyBygFnuXboDyqSJhw1wE",
     authDomain: "paths-b4263.firebaseapp.com",
     projectId: "paths-b4263",
@@ -19,12 +20,11 @@ firebase.initializeApp({
     appId: "1:593046877890:web:1dde0a03e3c7181e7cad5b",
     measurementId: "G-LBKBQ1XBDC"
 
-})
-
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-
-
+}
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+const analytics = getAnalytics(app);
 const Header = (props) => {
     return (
         <header>
@@ -33,16 +33,6 @@ const Header = (props) => {
             <span className='total-items'>Items: {props.itemTotal}</span>
         </header>
     );
-}
-
-const Item = (props) => {
-    return (
-        <div className='item'>
-            <button className='remove-item' onClick={() => props.removeItem(props.id)}/>
-            <span className='item-name'>{props.name}</span>
-            <Counter streak={props.streak} />
-        </div>
-    );npm   
 }
 
 const Counter = (props) => {
@@ -68,7 +58,97 @@ const Counter = (props) => {
     );
 }
 
+const Item = (props) => {
+    return (
+        <div className='item'>
+            <button className='remove-item' onClick={() => props.removeItem(props.id)} />
+            <span className='item-name'>{props.name}</span>
+            <Counter streak={props.streak} />
+        </div>
+    );
+}
+
+function SignIn() {
+    const signInWithGoogle = () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider);
+    };
+
+    return (
+        <>
+            <button onClick={signInWithGoogle}>Sign in with Google</button>
+            <p>Do not violate the community guidelines or you will be banned for life!</p>
+        </>
+    );
+}
+
+function SignOut() {
+    return auth.currentUser && (
+        <button onClick={() => auth.signOut()}>Sign Out</button>
+    );
+}
+    
+    function ChatRoom() {
+        const dummy = useRef();
+        const messagesRef = firestore.collection('messages');
+        const query = messagesRef.orderBy('createdAt').limit(25);
+      
+        const [messages] = useCollectionData(query, { idField: 'id' });
+      
+        const [formValue, setFormValue] = useState('');
+      
+      
+        const sendMessage = async (e) => {
+          e.preventDefault();
+      
+          const { uid, photoURL } = auth.currentUser;
+      
+          await messagesRef.add({
+            text: formValue,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            uid,
+            photoURL
+          })
+      
+          setFormValue('');
+          dummy.current.scrollIntoView({ behavior: 'smooth' });
+        }
+      
+        return (<>
+          <main>
+      
+            {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
+      
+            <span ref={dummy}></span>
+      
+          </main>
+      
+          <form onSubmit={sendMessage}>
+      
+            <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
+      
+            <button type="submit" disabled={!formValue}>🕊️</button>
+      
+          </form>
+        </>)
+    }
+    
+    function ChatMessage(props) {
+        const { text, uid, photoURL } = props.message;
+      
+        const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
+      
+        return (<>
+          <div className={`message ${messageClass}`}>
+            <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+            <p>{text}</p>
+          </div>
+        </>)
+    }
+    
+
 const App = () => {
+    const [user] = useAuthState(auth);
     const [items, setItems] = useState([
         {
             name: "Sleep 8 hrs",
@@ -105,41 +185,52 @@ const App = () => {
     const [newItemName, setNewItemName] = useState('');
 
     const handleRemoveItem = (id) => {
-        setItems(prevItems => prevItems.filter(i => i.id !== id))
-    }
+        setItems(prevItems => prevItems.filter(i => i.id !== id));
+    };
 
     const handleAddItem = () => {
         const newItem = {
             name: newItemName,
-            streak: 0, 
-            id: Math.max(0, ...items.map(i => i.id)) + 1 
+            streak: 0,
+            id: Math.max(0, ...items.map(i => i.id)) + 1
         };
         setItems(prevItems => [...prevItems, newItem]);
-        setNewItemName(''); // Reset input field after adding
-
-    }
+        setNewItemName('');
+    };
 
     return (
-        <div className='todo-list'>
+        <div className='app'>
             <Header title='The 7 Paths' itemTotal={items.length} />
-            <div>
-                <input 
-                    type="text" 
-                    value={newItemName} 
-                    onChange={(e) => setNewItemName(e.target.value)} 
-                    placeholder="Add new item" 
-                />
-                <button onClick={handleAddItem}>Add Item</button>
-            </div>
-            {items.map(item => (
-                <Item 
-                    name={item.name}
-                    id={item.id}
-                    streak={item.streak}
-                    key={item.id} 
-                    removeItem={handleRemoveItem}
-                />
-            ))}
+
+            {user ? (
+                <>
+                    <SignOut />
+
+                    <div className='todo-list'>
+                        <input 
+                            type="text" 
+                            value={newItemName} 
+                            onChange={(e) => setNewItemName(e.target.value)} 
+                            placeholder="Add new item" 
+                        />
+                        <button onClick={handleAddItem}>Add Item</button>
+
+                        {items.map(item => (
+                            <Item 
+                                name={item.name}
+                                id={item.id}
+                                streak={item.streak}
+                                key={item.id} 
+                                removeItem={handleRemoveItem}
+                            />
+                        ))}
+                    </div>
+
+                    <ChatRoom /> {/* ChatRoom */}
+                </>
+            ) : (
+                <SignIn /> /* SignIn */
+            )}
         </div>
     );
 }
@@ -150,3 +241,5 @@ root.render(
         <App />
     </React.StrictMode>
 );
+
+export default App;
