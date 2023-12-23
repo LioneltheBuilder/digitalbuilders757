@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'; // Import uuidv4
 import Header from './components/Header';
 import Item from './components/Item';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
 import ChatRoom from './components/ChatRoom';
 import { auth } from './firebase';
-
 
 const App = () => {
     const [user] = useAuthState(auth);
@@ -60,15 +59,14 @@ const App = () => {
         setNewItemName('');
     };
     
-
     return (
         <div className='app'>
             <Header title='The 7 Paths' itemTotal={items.length} />
-    
+
             {user ? (
                 <>
                     <SignOut />
-    
+
                     <div className='todo-list'>
                         <input 
                             type="text" 
@@ -77,7 +75,7 @@ const App = () => {
                             placeholder="Add new item" 
                         />
                         <button onClick={handleAddItem}>Add Item</button>
-    
+
                         {items.map(item => (
                             <Item 
                                 name={item.name}
@@ -88,7 +86,7 @@ const App = () => {
                             />
                         ))}
                     </div>
-    
+
                     <ChatRoom /> {/* ChatRoom component */}
                 </>
             ) : (
@@ -96,5 +94,6 @@ const App = () => {
             )}
         </div>
     );
-    
+};
+
 export default App;
