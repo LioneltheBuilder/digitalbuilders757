@@ -1,11 +1,12 @@
 import React from 'react';
 import { signOut } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { auth } from '../firebase';
 
 const SignOut = () => {
-    const auth = getAuth();
+    const authInstance = getAuth(); // Rename the variable to avoid naming conflict
     return auth.currentUser && (
-        <button onClick={() => signOut(auth)}>Sign Out</button>
+        <button onClick={() => signOut(authInstance)}>Sign Out</button>
     );
 }
 
