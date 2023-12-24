@@ -7,6 +7,7 @@ import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
 import ChatRoom from './components/ChatRoom';
 import { auth } from './firebase'; // Make sure to import 'auth' from your 'firebase.js' file
+import { ChakraProvider } from "@chakra-ui/react";
 
 const App = () => {
   const [user] = useAuthState(auth);
@@ -60,39 +61,41 @@ const App = () => {
   };
 
   return (
-    <div className="app">
-      <Header title="The 7 Paths" itemTotal={items.length} />
+    <ChakraProvider>
+      <div className="app">
+        <Header title="The 7 Paths" itemTotal={items.length} />
 
-      {user ? (
-        <>
-          <SignOut />
+        {user ? (
+          <>
+            <SignOut />
 
-          <div className="todo-list">
-            <input
-              type="text"
-              value={newItemName}
-              onChange={(e) => setNewItemName(e.target.value)}
-              placeholder="Add new item"
-            />
-            <button onClick={handleAddItem}>Add Item</button>
-
-            {items.map((item) => (
-              <Item
-                name={item.name}
-                id={item.id}
-                streak={item.streak}
-                key={item.id}
-                removeItem={() => handleRemoveItem(item.id)}
+            <div className="todo-list">
+              <input
+                type="text"
+                value={newItemName}
+                onChange={(e) => setNewItemName(e.target.value)}
+                placeholder="Add new item"
               />
-            ))}
-          </div>
+              <button onClick={handleAddItem}>Add Item</button>
 
-          <ChatRoom /> {/* ChatRoom component */}
-        </>
-      ) : (
-        <SignIn /> /* SignIn component */
-      )}
-    </div>
+              {items.map((item) => (
+                <Item
+                  name={item.name}
+                  id={item.id}
+                  streak={item.streak}
+                  key={item.id}
+                  removeItem={() => handleRemoveItem(item.id)}
+                />
+              ))}
+            </div>
+
+            <ChatRoom />
+          </>
+        ) : (
+          <SignIn />
+        )}
+      </div>
+    </ChakraProvider>
   );
 };
 
