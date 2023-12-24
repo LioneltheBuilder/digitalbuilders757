@@ -14,8 +14,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app); // Rename 'firestore' to 'db'
-
+export const db = getFirestore(app);
 export const auth = getAuth(app);
-export const firestore = db; // Use 'db' instead of 'firestore'
 export const analytics = getAnalytics(app);
