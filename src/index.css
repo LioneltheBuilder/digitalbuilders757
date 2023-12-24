@@ -1,21 +1,23 @@
+/* Global Styles */
 body {
   margin: 0;
   background: #141414;
-  font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   text-transform: uppercase;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Header Styles */
 header {
   color: #ede5e5;
   padding: 5px 10px;
   text-align: center;
   display: flex;
   align-items: center;
-  background-color: a#000000;
+  background-color: #000000; /* Corrected color code */
   border-bottom: solid 2px #060606;
 }
 
@@ -26,6 +28,7 @@ header h1 {
   font-weight: normal;
 }
 
+/* Todo List Styles */
 .todo-list {
   background: #fff;
   width: 450px;
@@ -34,6 +37,7 @@ header h1 {
   overflow: hidden;
 }
 
+/* Item Styles */
 .item {
   display: flex;
   align-items: center;
@@ -42,31 +46,10 @@ header h1 {
   letter-spacing: 2px;
 }
 
-.remove-item:hover+.item-name {
-  text-decoration: line-through;
-}
-
-.total-items {
-  width: 100px;
-  margin: 0 0 0 28px;
-  font-weight: normal;
-}
-
-.total-items td:first-child {
-  text-align: right;
-  font-weight: normal;
-  letter-spacing: 2px;
-  font-size: .7em;
-}
-
-.item-name,
-.quantity-amount {
-  color: #030303;
-}
-
 .item-name {
   flex-grow: 1;
   line-height: 3.5em;
+  color: #030303;
 }
 
 .remove-item {
@@ -81,46 +64,35 @@ header h1 {
   box-shadow: 0 0 .1rem #010101b1;
 }
 
+.remove-item:hover + .item-name {
+  text-decoration: line-through;
+}
+
+/* Quantity Styles */
 .quantity {
   display: grid;
   grid-template-areas:
-  "QTY increment value"
-  "QTY decrement value";
+    "QTY increment value"
+    "QTY decrement value";
 }
 
-.qty-label{
-  grid-area: QTY;
+.qty-label, .increment, .decrement {
+  color: #020202;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #020202;
+  cursor: pointer;
   font-size: 0.8em;
 }
 
-.increment,
-.decrement {
-  cursor: pointer;
-  text-align: center;
+.increment, .decrement {
   border: none;
   background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100%;
-  margin: auto .5rem;
+  margin: 0 .5rem;
   padding: .33rem;
   width: 2rem;
   font-size: 1.1rem;
-  margin: 0 .5rem;
-}
-
-.decrement {
-  grid-area: decrement;
-}
-
-.increment {
-  grid-area: increment;
-  align-self: end;
 }
 
 .increment:hover {
@@ -132,6 +104,20 @@ header h1 {
 }
 
 .quantity-amount {
+  color: #030303;
+}
+
+.increment {
+  grid-area: increment;
+  align-self: end;
+}
+
+.decrement {
+  grid-area: decrement;
+}
+
+/* Quantity Amount Styles */
+.quantity-amount {
   grid-area: value;
   align-self: center;
   font-family: monospace;
@@ -142,10 +128,7 @@ header h1 {
   width: 45px;
 }
 
-body {
-  background-color: #282c34;
-}
-
+/* App Container Styles */
 .App {
   text-align: center;
   max-width: 728px;
@@ -154,18 +137,18 @@ body {
 
 .App header {
   background-color: #181717;
-  height: 10vh;
-  min-height: 50px;
   color: white;
-  position: fixed;
-  width: 100%;
-  max-width: 728px;
-  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 99;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 728px;
+  height: 10vh;
+  min-height: 50px;
   padding: 10px;
+  z-index: 99;
   box-sizing: border-box;
 }
 
@@ -177,15 +160,17 @@ body {
   background-color: rgb(40, 37, 53);
 }
 
+/* Main Content Styles */
 main {
   padding: 10px;
   height: 80vh;
-  margin: 10vh 0 10vh;
+  margin: 10vh 0;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }
 
+/* Scrollbar Styles */
 main::-webkit-scrollbar {
   width: 0.25rem;
 }
@@ -198,6 +183,7 @@ main::-webkit-scrollbar-thumb {
   background: #6649b8;
 }
 
+/* Form Styles */
 form {
   height: 10vh;
   position: fixed;
@@ -214,7 +200,7 @@ form button {
   background-color: rgb(56, 56, 143);
 }
 
-
+/* Input Styles */
 input {
   line-height: 1.5;
   width: 100%;
@@ -226,13 +212,13 @@ input {
   padding: 0 10px;
 }
 
+/* Button Styles */
 button {
-  background-color: #282c34; /* Green */
+  background-color: #282c34;
   border: none;
   color: white;
   padding: 15px 32px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   cursor: pointer;
   font-size: 1.25rem;
@@ -243,7 +229,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-
+/* Sign-in Styles */
 .sign-in {
   color: #282c34;
   background: white;
@@ -251,9 +237,7 @@ button:disabled {
   margin: 0 auto;
 }
 
-
-
-
+/* List and Paragraph Styles */
 ul, li {
   text-align: left;
   list-style: none;
@@ -270,26 +254,25 @@ p {
   text-align: center;
 }
 
+/* Message Styles */
 .message {
   display: flex;
   align-items: center;
 }
 
-
-.sent {
+.sent, .received p {
   flex-direction: row-reverse;
-}
-
-.sent p {
+  align-self: flex-end;
   color: white;
   background: #0b93f6;
-  align-self: flex-end;
 }
+
 .received p {
   background: #e5e5ea;
   color: black;
 }
 
+/* Image Styles */
 img {
   width: 40px;
   height: 40px;
@@ -297,8 +280,7 @@ img {
   margin: 2px 5px;
 }
 
-
+/* Code Styles */
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
