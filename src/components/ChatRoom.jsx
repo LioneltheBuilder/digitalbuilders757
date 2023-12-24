@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { collection, addDoc, query, orderBy, limit, serverTimestamp } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import ChatMessage from './ChatMessage';
-import { auth } from './firebase';
+import ChatMessage from './ChatMessage.jsx';
+import { auth } from '../firebase';
 
 
 function ChatRoom({ firestore }) {
