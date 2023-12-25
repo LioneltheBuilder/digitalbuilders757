@@ -3,6 +3,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './contexts/UserContext.jsx';
 import { TodoListsProvider } from './contexts/TodoListsContext.jsx';
+import LoginPage from './pages/LoginPage/LoginPage.jsx';
+
 
 
 import { v4 as uuidv4 } from 'uuid';
@@ -75,15 +77,15 @@ const App = () => {
         <TodoListsProvider>
           <Router>
             <Routes>
-              <Route path="/login" element={<SignIn />} />
+              <Route path="/login" element={<LoginPage />} />
               <Route path="/" element={
                 <div className="app">
                   {user ? (
                     <>
+                      {/* Authenticated user content */}
                       <Header title="The 7 Paths" itemTotal={items.length} />
                       <SignOut />
                       <div className="todo-list">
-                        {/* Todo list content */}
                         {items.map((item) => (
                           <Item
                             name={item.name}
@@ -97,7 +99,7 @@ const App = () => {
                       <ChatRoom />
                     </>
                   ) : (
-                    <SignIn />
+                    <LoginPage /> // This line was causing the error, make sure it's correct
                   )}
                 </div>
               } />
