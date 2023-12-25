@@ -1,27 +1,21 @@
 import React, { useState } from 'react';
+import { Box, Button, Text } from '@chakra-ui/react';
+import { counterStyles } from '../styles/counterStyles';
 
+const Counter = ({ streak }) => {
+    const [currentStreak, setCurrentStreak] = useState(streak);
 
-const Counter = (props) => {
-    const [streak, setStreak] = useState(props.streak);
-
-    const incrementStreak = () => {
-        setStreak(prevStreak => prevStreak + 1);
-    }
-
-    const decrementStreak = () => {
-        if (streak > 0) {
-            setStreak(prevStreak => prevStreak - 1);
-        }
-    }
+    const incrementStreak = () => setCurrentStreak(prevStreak => prevStreak + 1);
+    const decrementStreak = () => currentStreak > 0 && setCurrentStreak(prevStreak => prevStreak - 1);
 
     return (
-        <div className='quantity'>
-            <span className='qty-label'> Streak</span>
-            <button className='increment' onClick={incrementStreak}>+</button>
-            <button className='decrement' onClick={decrementStreak}>-</button>
-            <span className='quantity-amount'>{streak}</span>
-        </div>
+        <Box sx={counterStyles.container}>
+            <Text sx={counterStyles.qtyLabel}>Streak</Text>
+            <Button sx={counterStyles.increment} onClick={incrementStreak}>+</Button>
+            <Button sx={counterStyles.decrement} onClick={decrementStreak}>-</Button>
+            <Text sx={counterStyles.quantityAmount}>{currentStreak}</Text>
+        </Box>
     );
-}
+};
 
 export default Counter;

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { v4 as uuidv4 } from 'uuid'; // Import uuidv4
+import { v4 as uuidv4 } from 'uuid';
 import Header from './components/Header';
 import Item from './components/Item';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
 import ChatRoom from './components/ChatRoom';
-import { auth } from './firebase'; // Make sure to import 'auth' from your 'firebase.js' file
-import { ChakraProvider } from "@chakra-ui/react";
+import { auth } from './firebase';
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { GlobalStyles } from './styles/globalStyles';
+
+// Create a custom theme
+const theme = extendTheme(GlobalStyles);
 
 const App = () => {
   const [user] = useAuthState(auth);
@@ -61,14 +65,12 @@ const App = () => {
   };
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <div className="app">
         <Header title="The 7 Paths" itemTotal={items.length} />
-
         {user ? (
           <>
             <SignOut />
-
             <div className="todo-list">
               <input
                 type="text"
@@ -77,7 +79,6 @@ const App = () => {
                 placeholder="Add new item"
               />
               <button onClick={handleAddItem}>Add Item</button>
-
               {items.map((item) => (
                 <Item
                   name={item.name}
@@ -88,7 +89,6 @@ const App = () => {
                 />
               ))}
             </div>
-
             <ChatRoom />
           </>
         ) : (

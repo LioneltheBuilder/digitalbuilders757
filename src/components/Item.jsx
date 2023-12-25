@@ -1,14 +1,16 @@
 import React from 'react';
-import Counter from './Counter.jsx';
+import { Box, Text, Button } from '@chakra-ui/react';
+import { itemStyles } from '../styles/itemStyles';
+import Counter from './Counter';
 
-const Item = (props) => {
+const Item = ({ id, name, streak, removeItem }) => {
     return (
-        <div className='item'>
-            <button className='remove-item' onClick={() => props.removeItem(props.id)} />
-            <span className='item-name'>{props.name}</span>
-            <Counter streak={props.streak} />
-        </div>
+        <Box sx={itemStyles.container}>
+            <Button sx={itemStyles.removeItem} onClick={() => removeItem(id)} />
+            <Text sx={itemStyles.itemName}>{name}</Text>
+            <Counter streak={streak} />
+        </Box>
     );
-}
+};
 
 export default Item;

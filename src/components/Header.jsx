@@ -1,13 +1,15 @@
 import React from 'react';
+import { Box, Text, Image } from '@chakra-ui/react';
 import logo from '../images/logo.png';
+import { headerStyles } from '../styles/headerStyles';
 
-const Header = (props) => {
+const Header = ({ title, itemTotal }) => {
     return (
-        <header>
-            <img src={logo} alt="Logo" style={{ height: '50px' }} />
-            <h1>{props.title}</h1>
-            <span className='total-items'>Items: {props.itemTotal}</span>
-        </header>
+        <Box as="header" sx={headerStyles.container}>
+            <Image src={logo} alt="Logo" boxSize="50px" />
+            <Text as="h1" sx={headerStyles.title}>{title}</Text>
+            <Text className="total-items">Items: {itemTotal}</Text>
+        </Box>
     );
 }
 
