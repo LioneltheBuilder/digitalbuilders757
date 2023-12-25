@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { UserProvider } from './contexts/UserContext.jsx';
+import { TodoListsProvider } from './contexts/TodoListsContext.jsx';
+
+
 import { v4 as uuidv4 } from 'uuid';
 import Header from './components/Header';
 import Item from './components/Item';
@@ -66,35 +71,40 @@ const App = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <div className="app">
-        <Header title="The 7 Paths" itemTotal={items.length} />
-        {user ? (
-          <>
-            <SignOut />
-            <div className="todo-list">
-              <input
-                type="text"
-                value={newItemName}
-                onChange={(e) => setNewItemName(e.target.value)}
-                placeholder="Add new item"
-              />
-              <button onClick={handleAddItem}>Add Item</button>
-              {items.map((item) => (
-                <Item
-                  name={item.name}
-                  id={item.id}
-                  streak={item.streak}
-                  key={item.id}
-                  removeItem={() => handleRemoveItem(item.id)}
-                />
-              ))}
-            </div>
-            <ChatRoom />
-          </>
-        ) : (
-          <SignIn />
-        )}
-      </div>
+      <UserProvider>
+        <TodoListsProvider>
+          <Router>
+            <Routes>
+              <Route path="/login" element={<SignIn />} />
+              <Route path="/" element={
+                <div className="app">
+                  {user ? (
+                    <>
+                      <Header title="The 7 Paths" itemTotal={items.length} />
+                      <SignOut />
+                      <div className="todo-list">
+                        {/* Todo list content */}
+                        {items.map((item) => (
+                          <Item
+                            name={item.name}
+                            id={item.id}
+                            streak={item.streak}
+                            key={item.id}
+                            removeItem={() => handleRemoveItem(item.id)}
+                          />
+                        ))}
+                      </div>
+                      <ChatRoom />
+                    </>
+                  ) : (
+                    <SignIn />
+                  )}
+                </div>
+              } />
+            </Routes>
+          </Router>
+        </TodoListsProvider>
+      </UserProvider>
     </ChakraProvider>
   );
 };
