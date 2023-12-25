@@ -3,8 +3,7 @@ import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase'; // Update the path as needed
 import { Box, Button, Input } from '@chakra-ui/react';
-import ThreeBackground from '../../components/ThreeBackground.jsx'; // Update the path as needed
-import * as THREE from 'three';
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -35,7 +34,6 @@ const LoginPage = () => {
 
   return (
     <Box textAlign="center">
-      <ThreeBackground />
       <Box p={4}>
         <form onSubmit={handleLogin}>
           <Input
