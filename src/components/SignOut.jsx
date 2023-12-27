@@ -1,14 +1,24 @@
 import React from 'react';
 import { signOut } from 'firebase/auth';
-import { getAuth } from 'firebase/auth';
-import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Button } from '@chakra-ui/react';
 import { signOutStyles } from '../styles/signOutStyles';
+import { auth } from '../firebase'; // Make sure to import auth
 
 const SignOut = () => {
-    const authInstance = getAuth();
+    const navigate = useNavigate(); // Create navigate instance
+
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth);
+            navigate('/login'); // Redirect to login page after signing out
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
+    };
+
     return auth.currentUser && (
-        <Button onClick={() => signOut(authInstance)} sx={signOutStyles.button}>
+        <Button onClick={handleSignOut} sx={signOutStyles.button}>
             Sign Out
         </Button>
     );
