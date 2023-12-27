@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase'; // Update the path as needed
-import { Box, Button, Input } from '@chakra-ui/react';
-
+import { Box, Button, Input, Flex, Image } from '@chakra-ui/react';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -33,8 +32,14 @@ const LoginPage = () => {
   };
 
   return (
-    <Box textAlign="center">
-      <Box p={4}>
+    <Flex direction="column" align="center" justify="center" height="100vh">
+      {/* Logo Banner */}
+      <Box mb={8}>
+        <Image src="/loginlogo.png" alt="Logo" />
+      </Box>
+
+      {/* Login Form */}
+      <Box width={['90%', '70%', '50%', '30%']} p={4} borderWidth="1px" borderRadius="lg">
         <form onSubmit={handleLogin}>
           <Input
             type="email"
@@ -56,7 +61,7 @@ const LoginPage = () => {
         {/* Google Sign-In Button */}
         <Button onClick={signInWithGoogle} colorScheme="red">Sign in with Google</Button>
       </Box>
-    </Box>
+    </Flex>
   );
 };
 
