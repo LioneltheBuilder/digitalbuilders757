@@ -5,7 +5,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { UserProvider } from './contexts/UserContext.jsx';
 import { TodoListsProvider } from './contexts/TodoListsContext.jsx';
-import LoginPage from './pages/LoginPage/LoginPage.jsx';
+import LoginPage from './pages/LoginPage/index.jsx';
 import MainPage from './pages/MainPage'; // Import MainPage
 import { auth } from './firebase';
 import { GlobalStyles } from './styles/globalStyles';
