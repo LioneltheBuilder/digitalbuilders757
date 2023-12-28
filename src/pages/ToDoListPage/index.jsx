@@ -1,7 +1,7 @@
 // TodoList.jsx
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Item from '../components/Item'; // Adjust the import path as necessary
+import Item from '../../components/Item'; // Adjust the import path as necessary
 
 const TodoList = () => {
   const [items, setItems] = useState([
