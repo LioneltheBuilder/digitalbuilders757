@@ -36,11 +36,12 @@ const LoginPage = () => {
       {/* Logo Banner */}
       <Box mb={8}>
         <Image src="/loginlogo.png" alt="Logo" />
-      </Box>
+      </Box>s
 
-      {/* Login Form */}
-      <Box width={['90%', '70%', '50%', '30%']} p={4} borderWidth="1px" borderRadius="lg">
-        <form onSubmit={handleLogin}>
+  {/* Existing Login Form */}
+  <Box width={['90%', '70%', '50%', '30%']} p={4} borderWidth="1px" borderRadius="lg" bg="rgba(255, 255, 255, 0.8)">
+    {/* ... your existing form code ... */}
+    <form onSubmit={handleLogin}>
           <Input
             type="email"
             placeholder="Email"
@@ -60,8 +61,9 @@ const LoginPage = () => {
 
         {/* Google Sign-In Button */}
         <Button onClick={signInWithGoogle} colorScheme="red">Sign in with Google</Button>
-      </Box>
-    </Flex>
+  </Box>
+</Flex>
+
   );
 };
 
