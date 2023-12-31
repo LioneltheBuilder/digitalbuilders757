@@ -1,19 +1,17 @@
-// src/styles/signInStyles.ts
 export const signInStyles = {
-    button: {
-      backgroundColor: 'green.500',
-      color: 'white',
-      padding: '8px 16px',
-      borderRadius: 'md',
-      _hover: {
-        backgroundColor: 'green.600',
-      },
-      margin: '10px 0',
+  button: {
+    backgroundColor: '#28A745', // Accent color
+    color: 'white',
+    padding: '8px 16px',
+    borderRadius: 'md',
+    _hover: {
+      backgroundColor: '#1e6b34', // Darker shade of accent
     },
-    text: {
-      color: 'gray.600',
-      fontSize: 'sm',
-      marginTop: '4',
-    },
-  };
-  
+    margin: '10px 0',
+  },
+  text: {
+    color: '#343A40', // Dark color
+    fontSize: 'sm',
+    marginTop: '4',
+  },
+};

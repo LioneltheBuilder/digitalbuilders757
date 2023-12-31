@@ -1,11 +1,15 @@
-import { extendTheme } from '@chakra-ui/react';
-import { buttonTheme } from './variants';
+// src/styles/theme.ts
+import { extendTheme } from "@chakra-ui/react";
 
-const theme = extendTheme({
+const customTheme = extendTheme({
   colors: {
-    navyBlue: '#00205B',
+    primary: '#007BFF',     // Electric Blue
+    secondary: '#F2F4F6',   // Soft Gray
+    accent: '#28A745',      // Vibrant Green
+    orange: '#FD7E14',      // Warm Orange
+    dark: '#343A40',        // Dark Slate
   },
-  components: { Button: buttonTheme },
+  // Add any other theme customizations here
 });
 
-export default theme;
+export default customTheme;

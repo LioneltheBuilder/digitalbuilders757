@@ -1,10 +1,8 @@
-import { GlobalStyleProps, mode } from '@chakra-ui/theme-tools';
-
 export const GlobalStyles = {
   styles: {
-    global: (props: GlobalStyleProps) => ({
+    global: {
       'html, body': {
-        background: '#0f0f0f',
+        background: '#F2F4F6', // Secondary color
         margin: '0',
         fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
           'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -17,12 +15,12 @@ export const GlobalStyles = {
         width: '0.25rem',
       },
       'main::-webkit-scrollbar-track': {
-        background: '#1e1e24',
+        background: '#F2F4F6', // Secondary color
       },
       'main::-webkit-scrollbar-thumb': {
-        background: '#6649b8',
+        background: '#007BFF', // Primary color
       },
       // ... add other global styles here
-    }),
+    },
   },
 };

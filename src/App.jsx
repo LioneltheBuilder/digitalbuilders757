@@ -1,16 +1,16 @@
+// App.js or your main component file
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+// App.js or your main component file
+import customTheme from './styles/theme';
 import { UserProvider } from './contexts/UserContext.jsx';
 import { TodoListsProvider } from './contexts/TodoListsContext.jsx';
 import LoginPage from './pages/LoginPage/index.jsx';
 import MainPage from './pages/MainPage'; // Import MainPage
 import { auth } from './firebase';
-import { GlobalStyles } from './styles/globalStyles';
-
-const customTheme = extendTheme(GlobalStyles);
 
 const App = () => {
   const [user] = useAuthState(auth);
