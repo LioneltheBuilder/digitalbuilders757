@@ -63,8 +63,8 @@ const LoginPage = () => {
           textAlign={isSmallScreen ? "center" : "left"}
           mb={isSmallScreen ? 4 : 0}
         >
-          <Heading size={isSmallScreen ? "lg" : "2xl"} mb={4}>Empower Your Tech Journey</Heading>
-          <Text fontSize={isSmallScreen ? "sm" : "xl"} mb={4}>Join us and start transforming your future today.</Text>
+          <Heading size={isSmallScreen ? "lg" : "2xl"} mb={4}>Digital Builders</Heading>
+          <Text fontSize={isSmallScreen ? "sm" : "xl"} mb={4}>Where coding meets creativity, and community thrives.</Text>
           
           {/* Login Form */}
           <Box maxWidth={isSmallScreen ? "full" : "400px"}>
