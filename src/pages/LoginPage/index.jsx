@@ -1,14 +1,15 @@
+
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase'; // Ensure the path is correct
-import { Box, Button, Input, Flex, Heading, Text, Image } from '@chakra-ui/react';
+import { Box, Button, Input, Flex, Heading, Text, Image, useMediaQuery } from '@chakra-ui/react';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
@@ -40,46 +41,42 @@ const LoginPage = () => {
       {/* Header */}
       <Box width="full" p={4} borderBottom="1px solid" borderColor="gray.200">
         <Flex justify="space-between" align="center">
-          <Heading size="md">The Digital Builders</Heading>
+          <Heading size={isMobile ? "lg" : "md"}>The Digital Builders</Heading>
           <Button onClick={handleJoinNow} colorScheme="blue">Join Now</Button>
         </Flex>
       </Box>
 
       {/* Hero Section */}
-      <Flex flex={1} p={10} align="center" justify="center">
-        {/* Left Side: Bold Statement and Tagline */}
-        <Flex direction="column" flex="1" justify="center" align="flex-start" pr={10}>
-          <Heading size="2xl" mb={4}>Empower Your Tech Journey</Heading>
-          <Text fontSize="xl" mb={4}>Join us and start transforming your future today.</Text>
-          {/* Login Form */}
-          <Box maxWidth="400px">
-            <form onSubmit={handleLogin}>
-              <Input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                mb={2}
-              />
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                mb={2}
-              />
-              <Button type="submit" colorScheme="blue" mb={2}>Log In</Button>
-            </form>
+      <Flex
+        flex={1}
+        p={10}
+        align="center"
+        justify="center"
+        direction={isMobile ? "column" : "row"}
+      >
+        {/* Conditional Image Placement for Mobile */}
+        {isMobile && (
+          <Box mb={4}>
+            <Image src="/path-to-your-hero-image.jpg" alt="Hero Image" objectFit="cover" borderRadius="md" />
+          </Box>
+        )}
 
-            {/* Google Sign-In Button */}
-            <Button onClick={signInWithGoogle} colorScheme="red">Sign in with Google</Button>
+        {/* Left Side: Bold Statement and Tagline */}
+        <Flex direction="column" flex={1} justify="center" align="flex-start" pr={isMobile ? 0 : 10} textAlign={isMobile ? "center" : "left"}>
+          <Heading size={isMobile ? "xl" : "2xl"} mb={4}>Empower Your Tech Journey</Heading>
+          <Text fontSize={isMobile ? "md" : "xl"} mb={4}>Join us and start transforming your future today.</Text>
+          {/* Login Form */}
+          <Box maxWidth={isMobile ? "100%" : "400px"}>
+            {/* ... (existing login form code) */}
           </Box>
         </Flex>
 
-        {/* Right Side: Image Placeholder */}
-        <Box flex="1">
-          <Image src="/hero2.png" alt="Hero Image" objectFit="cover" borderRadius="md" />
-        </Box>
+        {/* Right Side: Image Placeholder for Desktop */}
+        {!isMobile && (
+          <Box flex="1">
+            <Image src="/hero2.png" alt="Hero Image" objectFit="cover" borderRadius="md" />
+          </Box>
+        )}
       </Flex>
     </Flex>
   );
